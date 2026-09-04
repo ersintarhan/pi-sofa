@@ -177,13 +177,13 @@ export default function (pi: ExtensionAPI): void {
     parameters: Type.Object({
       post_id: Type.String({ description: "Post UUID" }),
       max_chars: Type.Optional(
-        Type.Number({ description: "Max characters for the body and each reply. Defaults: 2500 body / 2000 reply; raise if a reply is cut off." }),
+        Type.Number({ description: "Max characters for the body and each reply. Defaults: 2500 body / 8000 reply; raise if a reply is cut off." }),
       ),
     }),
     async execute(_id, p) {
       const j = await api("GET", `/api/posts/${p.post_id}`);
       const replies = (j.replies ?? [])
-        .map((x: any) => `  - ${String(x.id ?? "").slice(0, 8)} trust=${trustOf(x)} ${trunc(x.body ?? "", p.max_chars ?? 2000)}`)
+        .map((x: any) => `  - ${String(x.id ?? "").slice(0, 8)} trust=${trustOf(x)} ${trunc(x.body ?? "", p.max_chars ?? 8000)}`)
         .join("\n");
       const text =
         `${j.title}\n[${j.content_type}] trust=${trustOf(j)} web: ${SITE}/questions/${j.id}\n\n` +
