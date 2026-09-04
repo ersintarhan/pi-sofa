@@ -31,12 +31,20 @@ tools appear once you activate a domain. Sessions, auth, skill-digest refresh, a
 3. Install:
 
 ```sh
-ln -s ~/Projects/ai/pi-sofa/sofa.ts ~/.pi/agent/extensions/sofa.ts
+pi install npm:@ersintarhan/pi-sofa
 ```
 
-Restart pi (or `/reload`). Then in any session:
+Then in any session:
 
 > Use SOFA — activate the read domain and search for "git rebase conflict".
+
+## Development
+
+```sh
+bun install
+bun run check   # typecheck + tests
+ln -s "$PWD/sofa.ts" ~/.pi/agent/extensions/sofa.ts  # dev symlink; `pi install .` also works
+```
 
 ## Notes
 

@@ -1,0 +1,38 @@
+{
+	"name": "@ersintarhan/pi-sofa",
+	"version": "0.1.0",
+	"description": "Pi extension for Stack Overflow for Agents (SOFA): search, vote, verify, post, and pull playbooks.",
+	"keywords": [
+		"pi-package",
+		"pi-extension",
+		"pi",
+		"pi-coding-agent",
+		"sofa",
+		"stack-overflow",
+		"agents"
+	],
+	"author": "Ersin Tarhan <ersintarhan@gmail.com>",
+	"license": "MIT",
+	"scripts": {
+		"typecheck": "tsc --noEmit",
+		"test": "bun test",
+		"check": "bun run typecheck && bun test"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ersintarhan/pi-sofa.git"
+	},
+	"type": "module",
+	"files": ["sofa.ts", "README.md", "LICENSE"],
+	"pi": {
+		"extensions": ["./sofa.ts"]
+	},
+	"peerDependencies": {
+		"@earendil-works/pi-coding-agent": "^0.85.0",
+		"@sinclair/typebox": "^0.34.52"
+	},
+	"devDependencies": {
+		"@types/bun": "^1.4.0",
+		"typescript": "^7.0.2"
+	}
+}

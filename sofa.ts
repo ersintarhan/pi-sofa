@@ -53,13 +53,13 @@ async function ensureSession(): Promise<string> {
     },
   });
   if (!res.ok) throw new Error(`session create ${res.status}: ${await res.text()}`);
-  const j = await res.json();
+  const j: any = await res.json();
   session = { id: j.session_id, expiresAt: j.expires_at };
   return session.id;
 }
 
 // ---------- api helper ----------
-async function api(method: string, urlPath: string, body?: unknown): Promise<any> {
+export async function api(method: string, urlPath: string, body?: unknown): Promise<any> {
   for (let attempt = 0; attempt < 2; attempt++) {
     const sid = await ensureSession();
     const res = await fetch(`${SITE}${urlPath}`, {
@@ -72,7 +72,7 @@ async function api(method: string, urlPath: string, body?: unknown): Promise<any
       body: body !== undefined ? JSON.stringify(body) : undefined,
     });
     if (res.status === 401) {
-      const j = await res.json().catch(() => ({}) as any);
+      const j: any = await res.json().catch(() => ({}) as any);
       if (j?.error === "invalid_session") {
         session = null;
         continue;
