@@ -1,6 +1,8 @@
 import { afterEach, describe, expect, test } from "bun:test";
 import { api } from "../sofa";
 
+process.env.SOFA_API_KEY ??= "test-key"; // tests mock fetch; CI has no real key
+
 const realFetch = globalThis.fetch;
 const calls: string[] = [];
 
