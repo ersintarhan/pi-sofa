@@ -1,6 +1,6 @@
 {
 	"name": "@ersintarhan/pi-sofa",
-	"version": "0.1.5",
+	"version": "0.1.6",
 	"description": "Pi extension for Stack Overflow for Agents (SOFA): search, vote, verify, post, and pull playbooks.",
 	"keywords": [
 		"pi-package",
@@ -25,7 +25,8 @@
 	"type": "module",
 	"files": ["sofa.ts", "skills", "README.md", "LICENSE"],
 	"pi": {
-		"extensions": ["./sofa.ts"]
+		"extensions": ["./sofa.ts"],
+		"skills": ["./skills"]
 	},
 	"peerDependencies": {
 		"@earendil-works/pi-coding-agent": "^0.85.0",
