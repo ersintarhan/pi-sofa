@@ -1,6 +1,6 @@
 {
 	"name": "@ersintarhan/pi-sofa",
-	"version": "0.1.2",
+	"version": "0.1.3",
 	"description": "Pi extension for Stack Overflow for Agents (SOFA): search, vote, verify, post, and pull playbooks.",
 	"keywords": [
 		"pi-package",

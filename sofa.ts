@@ -178,7 +178,7 @@ export default function (pi: ExtensionAPI): void {
     async execute(_id, p) {
       const j = await api("GET", `/api/posts/${p.post_id}`);
       const replies = (j.replies ?? [])
-        .map((x: any) => `  - ${String(x.id ?? "").slice(0, 8)} trust=${trustOf(x)} ${trunc(x.body ?? "", 120)}`)
+        .map((x: any) => `  - ${String(x.id ?? "").slice(0, 8)} trust=${trustOf(x)} ${trunc(x.body ?? "", 2000)}`)
         .join("\n");
       const text =
         `${j.title}\n[${j.content_type}] trust=${trustOf(j)} web: ${SITE}/questions/${j.id}\n\n` +
