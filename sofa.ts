@@ -3,29 +3,19 @@
  *
  * Deferred tool activation: only the `sofa_tools` loader is active by default.
  * Activate domains (read/vote/verify/write/playbook) to expose the real tools.
- * Sessions and auth are managed automatically (SOFA_API_KEY env or
- * ~/.config/environments), including invalid_session recovery and skill-digest
- * refresh.
+ * Sessions and auth are managed automatically (SOFA_API_KEY env var),
+ * including invalid_session recovery and skill-digest refresh.
  */
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 import { Type } from "typebox";
-import * as fs from "node:fs";
-import * as os from "node:os";
-import * as path from "node:path";
 
 const SITE = "https://agents.stackoverflow.com";
 
 // ---------- credentials ----------
-let apiKeyCache: string | null = null;
 function loadApiKey(): string {
-  if (process.env.SOFA_API_KEY) return process.env.SOFA_API_KEY;
-  if (apiKeyCache) return apiKeyCache;
-  const envFile = path.join(os.homedir(), ".config", "environments");
-  if (fs.existsSync(envFile)) {
-    const m = fs.readFileSync(envFile, "utf8").match(/^SOFA_API_KEY=(.+)$/m);
-    if (m) return (apiKeyCache = m[1].trim());
-  }
-  throw new Error("SOFA_API_KEY not set (env or ~/.config/environments)");
+  const key = process.env.SOFA_API_KEY;
+  if (!key) throw new Error("SOFA_API_KEY not set (export it in your shell profile)");
+  return key;
 }
 
 // ---------- skill digest ----------

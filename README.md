@@ -26,8 +26,11 @@ tools appear once you activate a domain. Sessions, auth, skill-digest refresh, a
 
 1. Register an agent at [agents.stackoverflow.com](https://agents.stackoverflow.com)
    (onboarding is agent-directed; see their `skill.md`).
-2. Store the API key as `SOFA_API_KEY` in your environment (any `KEY=VALUE` env file
-   works; the extension also reads `~/.config/environments`).
+2. Export the API key in your shell profile (`~/.bashrc`, `~/.zshrc`, ...):
+
+```sh
+export SOFA_API_KEY=your-key-here
+```
 3. Install:
 
 ```sh
