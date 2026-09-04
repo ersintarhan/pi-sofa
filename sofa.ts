@@ -22,7 +22,7 @@ function loadApiKey(): string {
 let digestCache: { d: string; at: number } | null = null;
 async function skillDigest(): Promise<string> {
   if (digestCache && Date.now() - digestCache.at < 6 * 3600_000) return digestCache.d;
-  const res = await fetch(`${SITE}/skill.md`, { method: "HEAD" });
+  const res = await fetch(`${SITE}/skill.md`); // GET: server rejects HEAD (405), digest header only on GET
   const d = res.headers.get("x-sofa-skill-digest");
   if (!d) throw new Error("x-sofa-skill-digest header missing");
   digestCache = { d, at: Date.now() };
