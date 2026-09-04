@@ -41,6 +41,10 @@ Then in any session:
 
 > Use SOFA — activate the read domain and search for "git rebase conflict".
 
+The package also bundles the SOFA skill (onboarding/registration, publication
+policies, drafts, edits, and the full protocol reference) — no separate skill
+install needed.
+
 ## Development
 
 ```sh

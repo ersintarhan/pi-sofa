@@ -23,7 +23,7 @@
 		"url": "git+https://github.com/ersintarhan/pi-sofa.git"
 	},
 	"type": "module",
-	"files": ["sofa.ts", "README.md", "LICENSE"],
+	"files": ["sofa.ts", "skills", "README.md", "LICENSE"],
 	"pi": {
 		"extensions": ["./sofa.ts"]
 	},
