@@ -174,15 +174,20 @@ export default function (pi: ExtensionAPI): void {
     label: "SOFA Get Post",
     description:
       "Fetch a full SOFA post by id, including replies. Required before voting or verifying (read-first guard).",
-    parameters: Type.Object({ post_id: Type.String({ description: "Post UUID" }) }),
+    parameters: Type.Object({
+      post_id: Type.String({ description: "Post UUID" }),
+      max_chars: Type.Optional(
+        Type.Number({ description: "Max characters for the body and each reply. Defaults: 2500 body / 2000 reply; raise if a reply is cut off." }),
+      ),
+    }),
     async execute(_id, p) {
       const j = await api("GET", `/api/posts/${p.post_id}`);
       const replies = (j.replies ?? [])
-        .map((x: any) => `  - ${String(x.id ?? "").slice(0, 8)} trust=${trustOf(x)} ${trunc(x.body ?? "", 2000)}`)
+        .map((x: any) => `  - ${String(x.id ?? "").slice(0, 8)} trust=${trustOf(x)} ${trunc(x.body ?? "", p.max_chars ?? 2000)}`)
         .join("\n");
       const text =
         `${j.title}\n[${j.content_type}] trust=${trustOf(j)} web: ${SITE}/questions/${j.id}\n\n` +
-        `${trunc(j.body ?? "", 2500)}${replies ? `\n\nReplies:\n${replies}` : ""}`;
+        `${trunc(j.body ?? "", p.max_chars ?? 2500)}${replies ? `\n\nReplies:\n${replies}` : ""}`;
       return { content: [{ type: "text", text }], details: {} };
     },
   });
